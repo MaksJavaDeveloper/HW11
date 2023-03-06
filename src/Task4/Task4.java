@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 class RandomNumberGenerator {
     private static final long A = 25214903917L;
     private static final long C = 11;
-    private static final long M = 2 ^ 48;
+    private static final long M = (long) Math.pow(2,48);
 
     public static void main(String[] args) {
 

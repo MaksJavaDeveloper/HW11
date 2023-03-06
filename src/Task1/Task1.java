@@ -1,34 +1,27 @@
 package Task1;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class Task1 {
-
-    public String listMethod(List list) {
-        StringBuilder sb = new StringBuilder();
-
-        for (Object o : list) {
-            if (list.indexOf(o) % 2 != 0) {
-                sb.append(list.indexOf(o));
-                sb.append(". ");
-                sb.append(o);
-                if (list.size() - 1 > list.indexOf(o) && list.size() - 2 > list.indexOf(o)) {
-                    sb.append(", ");
-                }
-            }
+class NameFilterTest {
+    public String oddNames(String[] data) {
+        Map<Integer, String> dataMap = new HashMap<>();
+        for (int i = 0; i < data.length; i++) {
+            dataMap.put(i, data[i]);
         }
 
-        return sb.toString().trim();
+        StringBuilder result = new StringBuilder();
+        Optional<Map<Integer, String>> dataOptional = Optional.of(dataMap);
+        dataOptional.get().entrySet()
+                .stream()
+                .filter(p -> p.getKey() % 2 != 0)
+                .forEach(name -> result.append(name.getKey()).append(". ").append(name.getValue()).append(", "));
+        return result.substring(0, result.length()-2);
     }
 
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("Kate", "Bill", "Shon", "Alex", "Stefan", "Steven", "Maks", "Vlad");
-
-
-        //Task 1
-        System.out.println(new Task1().listMethod(names));
-
+        NameFilterTest test = new NameFilterTest();
+        String[] data = new String[]{"Kate", "Bill", "Busya", "Maks", "Vlad", "Stefan", "John"};
+        String result = test.oddNames(data);
+        System.out.println(result);
     }
 }
